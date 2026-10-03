@@ -54,7 +54,7 @@ if ($connected) {
   <title><?= $serverName ?> Web Server</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    .badge-main { background-color: <?= $color ?>; }
+    .badge-main { background-color: <?= $color ?>; font-size: 0.5em; padding: 0.4em 0.7em; vertical-align: middle; border-radius: 8px; }
     .btn-main { background-color: <?= $color ?>; border-color: <?= $color ?>; color: #fff; }
     .btn-main:hover { background-color: <?= $color ?>; border-color: <?= $color ?>; color: #fff; opacity: .9; }
   </style>
@@ -84,7 +84,36 @@ if ($connected) {
         </div>
         <div class="mb-3">
           <label class="form-label">Email</label>
-                </div>
+          <input type="email" name="email" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">เบอร์โทร</label>
+          <input type="text" name="phone" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-main">บันทึกข้อมูล</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">ข้อมูลผู้ใช้</div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr><th>ID</th><th>ชื่อ</th><th>Email</th><th>เบอร์โทร</th></tr>
+        </thead>
+        <tbody>
+          <?php while ($rows && ($row = $rows->fetch_assoc())): ?>
+          <tr>
+            <td><?= (int)$row['id'] ?></td>
+            <td><?= htmlspecialchars($row['name']) ?></td>
+            <td><?= htmlspecialchars($row['email'] ?? '') ?></td>
+            <td><?= htmlspecialchars($row['phone'] ?? '') ?></td>
+          </tr>
+          <?php endwhile; ?>
+        </tbody>
+      </table>
+    </div>
   </div>
   <?php endif; ?>
 </div>
