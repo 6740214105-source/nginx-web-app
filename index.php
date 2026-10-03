@@ -84,3 +84,9 @@ if ($connected) {
         </div>
         <div class="mb-3">
           <label class="form-label">Email</label>
+                </div>
+  </div>
+  <?php endif; ?>
+</div>
+</body>
+</html>
