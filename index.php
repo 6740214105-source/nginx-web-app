@@ -1,8 +1,7 @@
 <?php
 $serverName = 'Nginx';
-$badgeClass = 'bg-success';
-$btnClass   = 'btn-success';
 $table      = 'users_nginx';
+$color      = '#ea580c';
 
 $host = getenv('MYSQLHOST') ?: 'mysql.railway.internal';
 $port = getenv('MYSQLPORT') ?: '3306';
@@ -54,10 +53,15 @@ if ($connected) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?= $serverName ?> Web Server</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .badge-main { background-color: <?= $color ?>; }
+    .btn-main { background-color: <?= $color ?>; border-color: <?= $color ?>; color: #fff; }
+    .btn-main:hover { background-color: <?= $color ?>; border-color: <?= $color ?>; color: #fff; opacity: .9; }
+  </style>
 </head>
 <body class="bg-light">
 <div class="container py-4" style="max-width: 900px;">
-  <h1 class="mb-3"><span class="badge <?= $badgeClass ?>"><?= $serverName ?></span> Web Server</h1>
+  <h1 class="mb-3"><span class="badge badge-main"><?= $serverName ?></span> Web Server</h1>
 
   <?php if ($connected): ?>
     <div class="alert alert-success">
@@ -80,38 +84,3 @@ if ($connected) {
         </div>
         <div class="mb-3">
           <label class="form-label">Email</label>
-          <input type="email" name="email" class="form-control">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">เบอร์โทร</label>
-          <input type="text" name="phone" class="form-control">
-        </div>
-        <button type="submit" class="btn <?= $btnClass ?>">บันทึกข้อมูล</button>
-      </form>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">ข้อมูลผู้ใช้</div>
-    <div class="card-body">
-      <table class="table table-striped">
-        <thead>
-          <tr><th>ID</th><th>ชื่อ</th><th>Email</th><th>เบอร์โทร</th></tr>
-        </thead>
-        <tbody>
-          <?php while ($rows && ($row = $rows->fetch_assoc())): ?>
-          <tr>
-            <td><?= (int)$row['id'] ?></td>
-            <td><?= htmlspecialchars($row['name']) ?></td>
-            <td><?= htmlspecialchars($row['email'] ?? '') ?></td>
-            <td><?= htmlspecialchars($row['phone'] ?? '') ?></td>
-          </tr>
-          <?php endwhile; ?>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <?php endif; ?>
-</div>
-</body>
-</html>
